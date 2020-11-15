@@ -5,7 +5,7 @@ import Popup from "./components/Popup";
 import axios from 'axios'
 
 function App() {
-  const apiurl = "http://www.omdbapi.com/?apikey=1dfa35e4";
+  const apiurl = "https://www.omdbapi.com/?apikey=1dfa35e4";
   const [state, setState] = useState({
     s: "",
     results: [],
