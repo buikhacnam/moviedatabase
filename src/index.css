@@ -46,7 +46,7 @@ section {
   font-size: 20px;
   font-weight: 300;
 
-  transition: 0.4s ease-out;
+  
 }
 
 .searchbox:focus {
@@ -81,7 +81,7 @@ section {
   padding: 10px;
   background: #445565;
   flex: 1 1 100%;
-  transition: 0.4s ease-out;
+  
 }
 
 .results .result:hover h3 {
@@ -93,8 +93,8 @@ section {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100vw;
-	height: 100vh;
+	min-width: 100vw;
+	height: 110vh;
 	background-color: #445565;
 
 	overflow-y: scroll;
@@ -154,9 +154,20 @@ section {
 	appearance: none;
 	cursor: pointer;
 
-	transition: 0.4s ease-out;
+	
 }
 
 .popup .content .close:hover {
 	background: #223343;
+}
+
+.no-result {
+  margin: auto 0;
+  margin-top: 10rem;
+}
+
+.no-result h1{
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
 }
