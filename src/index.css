@@ -6,7 +6,7 @@
 
 body {
   font-family: 'montserrat', sans-serif;
-  background-color: #223343;
+  background-color: #833471;
 }
 
 header {
@@ -63,10 +63,12 @@ section {
 .results .result {
   width: 33.33333%;
   min-width: 250px;
-  padding: 15px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  color: #833471;
+
 }
 
 .results .result img {
@@ -75,19 +77,15 @@ section {
 }
 
 .results .result h3 {
-  color: #fff;
+  background-color: #fff;
   font-size: 20px;
   font-weight: 600;
   padding: 10px;
-  background: #445565;
+  color: #833471;
   flex: 1 1 100%;
   
 }
 
-.results .result:hover h3 {
-  background: #fff;
-  color: #223343;
-}
 
 .popup {
 	position: fixed;
@@ -95,7 +93,7 @@ section {
 	left: 0;
 	min-width: 100vw;
 	height: 110vh;
-	background-color: #445565;
+	background-color: #833471;
 
 	overflow-y: scroll;
 }
@@ -157,9 +155,6 @@ section {
 	
 }
 
-.popup .content .close:hover {
-	background: #223343;
-}
 
 .no-result {
   margin: auto 0;

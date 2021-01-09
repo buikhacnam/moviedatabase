@@ -1,51 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Search from "./components/Search";
 import Results from "./components/Results";
 import Popup from "./components/Popup";
-
 import axios from 'axios'
 
 function App() {
   const apiurl = "https://www.omdbapi.com/?apikey=1dfa35e4";
-  const starWar = "https://www.omdbapi.com/?apikey=1dfa35e4&s=star wars";
   const [state, setState] = useState({
     s: "",
     results: [],
-    resultsFirst: [],
-    loading: true,
     selected: {},
-    nothing: false
   })
 
-  useEffect(() => {
-    axios(starWar)
-    .then(({data}) => {
-      let results = data.Search;
-      console.log(results);
-      setState(prevState => {
-        return {  
-              prevState,         
-             results
-          }
-       })
-    })
-  }, [])
-
-  //console.log(state);
-
   const search = (e) => {
+  
     if (e.key === "Enter" && (state.s)) {
+      setState(prev => {
+        return {...prev, loading: true}
+      })
       axios(apiurl + "&s=" + state.s)
       .then((data) => {
-        let initialResult = data;
         let results = "";
         if (data.data.Search) {
           results = data.data.Search;
         }
-
-       
-        console.log(results);
-        console.log(typeof(initialResult));
         setState(prevState => {
           return {
             ...prevState,
@@ -63,15 +41,17 @@ function App() {
     setState(prevState => {
       return { 
         ...prevState, 
-        
         s
       }
     })
   }
-    //console.log(state.s)
+ 
   }
 
   const openPopup = id => {
+    setState(prev => {
+      return {...prev, loading: true}
+    })
     axios(apiurl + "&i=" + id).then(({data}) => {
       let result = data;
       console.log(result);
@@ -79,7 +59,8 @@ function App() {
       setState(prevState => {
           return {
             ...prevState,
-            selected: result
+            selected: result,
+            loading: false,
           }
       })
       }
@@ -91,7 +72,7 @@ function App() {
     setState(prevState => {
       return {
         ...prevState,
-        selected: false
+        selected: {},
       }
     })
   }
@@ -104,39 +85,24 @@ function App() {
        <h1>Movie Database</h1>
       </header>
       <main>
-          <Search handleInput={handleInput} search={search} />
-         
+          <Search handleInput={handleInput} search={search} />      
+
+          {state.loading && <h1 style={{color: "#ffffff", textAlign: 'center'}}>Loading...</h1>}
+
          { (state.results)?
             <Results results={state.results} openPopup={openPopup}/> :
             <div className="no-result">
               <h1>no result</h1>
             </div>
-
-         }
-           
-        
-          
-          {(state.selected) &&
+         } 
+          {!(Object.keys(state.selected).length === 0 && state.selected.constructor === Object) &&
             <Popup selected={state.selected} closePopup={closePopup} /> 
-            
           }
-           
-            
-        
-
+          
       </main>
     </div>
   );
 }
-
+//Object.keys(state.selected).length === 0 && state.selected.constructor === Object
 export default App;
 
-/*
- <Results results={state.results} openPopup={openPopup}/> 
-
-   {(typeof state.selected.Title !== "undefined") ?
-            <Popup selected={state.selected} closePopup={closePopup} /> :
-            false
-          }
-
-*/
